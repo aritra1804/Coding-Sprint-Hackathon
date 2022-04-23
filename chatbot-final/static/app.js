@@ -86,6 +86,21 @@ class Chatbox {
             else {
                 html += '<div class="messages__item messages__item--operator">' + item.message + '</div>'
             }
+
+            if (item.name == "Ordinance") {
+
+            let speech = new SpeechSynthesisUtterance();
+
+            console.log(item.message);
+
+            speech.lang = "en-US";
+            speech.text = item.message;
+            speech.volume = 1;
+            speech.rate = 1;
+            speech.pitch = 1;                
+
+            window.speechSynthesis.speak(speech);
+            }
         });
 
         const chatmessage = chatbox.querySelector('.chatbox__messages');
