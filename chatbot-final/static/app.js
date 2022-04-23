@@ -79,6 +79,7 @@ class Chatbox {
 
     updateChatText(chatbox) {
         var html = '';
+        var counter = 0;
         this.messages.slice().reverse().forEach(function(item, index) {
             if (item.name == "Ordinance"){
                 html += '<div class="messages__item messages__item--visitor">' + item.message + '</div>'
@@ -87,17 +88,25 @@ class Chatbox {
                 html += '<div class="messages__item messages__item--operator">' + item.message + '</div>'
             }
 
-            if (item.name == "Ordinance") {
+            if (item.name == "Ordinance" && counter == 0) {
 
             let speech = new SpeechSynthesisUtterance();
 
-            console.log(item.message);
+            var msg = item.message;
+
+            var msg_str = msg.split('.')[0]
+
+            console.log(msg_str);
 
             speech.lang = "en-US";
-            speech.text = item.message;
+            speech.text = msg_str;
             speech.volume = 1;
             speech.rate = 1;
-            speech.pitch = 1;                
+            speech.pitch = 1;  
+
+            counter+=1;
+            
+            var count = 1;
 
             window.speechSynthesis.speak(speech);
             }
